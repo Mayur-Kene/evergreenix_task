@@ -17,7 +17,7 @@ class CustomInputField extends StatelessWidget {
   final int? maxLength;
 
   const CustomInputField({
-    Key? key,
+    super.key,
     required this.icon,
     required this.hintText,
     required this.controller,
@@ -28,7 +28,7 @@ class CustomInputField extends StatelessWidget {
     this.onChanged,
     this.validator, // ✅
     this.maxLength
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

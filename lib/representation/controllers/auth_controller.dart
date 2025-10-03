@@ -57,7 +57,8 @@ class AuthController extends GetxController {
       AppLoader.hideLoader();
       AppStorage.setValue(StorageKey.isLoggedIn, true);
       AppStorage.setValue(StorageKey.token, response['authToken']);
-      Toast.success(message: "Success");
+      AppStorage.setValue(StorageKey.email, emailController.text);
+      Toast.success(message: "Log In Successfully");
       Get.to(HomeScreen());
     }, onError: (e) {
       AppLoader.hideLoader();
@@ -66,14 +67,8 @@ class AuthController extends GetxController {
   }
 
   void signUp() async {
-    if (!validateEmail(registerEmailController)) {
-      Toast.error(message: "Enter a valid email");
-      return;
-    }
-    if (!validatePasswordsMatch()) {
-      Toast.error(message: "Password and Confirm Password do not match");
-      return;
-    }
+    if (!validateSignupForm()) return;
+
     final body = {
       "name": nameController.text,
       "emailAddress": registerEmailController.text,
@@ -98,17 +93,50 @@ class AuthController extends GetxController {
     AppStorage.logout();
     clearControllers();
 
-
     // Navigate to Login Screen and remove HomeScreen from stack
     Get.offAll(() => LoginScreen());
   }
 
-  bool validateEmail(TextEditingController controller) {
-    return GetUtils.isEmail(controller.text.trim());
+  bool validateSignupForm() {
+    // 1. All fields must be filled
+    if (nameController.text.isEmpty ||
+        registerEmailController.text.isEmpty ||
+        phoneNoController.text.isEmpty ||
+        newPassController.text.isEmpty ||
+        confirmPassController.text.isEmpty) {
+      Toast.error(message: "All fields are required");
+      return false;
+    }
+
+    // 2. Check email format
+    if (!GetUtils.isEmail(registerEmailController.text.trim())) {
+      Toast.error(message: "Enter a valid email address");
+      return false;
+    }
+
+    // 3. Check mobile number length (exactly 10 digits)
+    if (phoneNoController.text.trim().length != 10) {
+      Toast.error(message: "Mobile number must be 10 digits");
+      return false;
+    }
+
+    // 4. Password length validation
+    if (newPassController.text.length < 6) {
+      Toast.error(message: "Password must be at least 6 characters long");
+      return false;
+    }
+
+    // 5. Password and confirm password match
+    if (newPassController.text != confirmPassController.text) {
+      Toast.error(message: "Password and Confirm Password do not match");
+      return false;
+    }
+
+    return true; // ✅ Passed all checks
   }
 
-  bool validatePasswordsMatch() {
-    return newPassController.text == confirmPassController.text;
+  bool validateEmail(TextEditingController controller) {
+    return GetUtils.isEmail(controller.text.trim());
   }
 
   void clearControllers() {

@@ -15,96 +15,99 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AuthController>(builder: (controller) {
-      return Scaffold(
-        body: Container(
-          width: double.maxFinite,
-          height: double.maxFinite,
-          color: primary, // solid dark navy background
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                'assets/icons/logo.svg',
-                width: 60,
-                height: 60,
-              ).marginOnly(bottom: 15),
-              Text(
-                "Create Account",
-                style: AppTheme.textStyle(size: 26, weight: FontWeight.bold),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+      return SafeArea(
+        child: Scaffold(
+          backgroundColor: primary,
+          resizeToAvoidBottomInset: true, // allows content to move up when keyboard opens
+          body: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min, // shrink to fit content
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  SvgPicture.asset(
+                    'assets/icons/logo.svg',
+                    width: 60,
+                    height: 60,
+                  ).marginOnly(bottom: 15),
                   Text(
-                    "Already have account ?",
-                    style: AppTheme.textStyle(size: 14),
+                    "Create Account",
+                    style: AppTheme.textStyle(size: 26, weight: FontWeight.bold),
+                    textAlign: TextAlign.center,
                   ),
-                  TextButton(
-                    onPressed: () {
-
-                      Get.offAll(LoginScreen());
-                      controller.clearControllers();
-                    },
-                    child: Text(
-                      "Login",
-                      style: AppTheme.textStyle(
-                          size: 14, weight: FontWeight.w600, color: blue),
-                    ),
+        
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Already have account ?",
+                        style: AppTheme.textStyle(size: 14),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          controller.clearControllers(); // clear signup fields
+                          Get.offAll(const LoginScreen());
+                        },
+                        child: Text(
+                          "Login",
+                          style: AppTheme.textStyle(
+                              size: 14, weight: FontWeight.w600, color: blue),
+                        ),
+                      ),
+                    ],
                   ),
+                 
+                  CustomInputField(
+                    icon: Icons.person,
+                    hintText: "Name",
+                    maxLength: 40,
+                    onChanged: (_) => controller.validateRegister(),
+                    controller: controller.nameController,
+                  ),
+                  CustomInputField(
+                    icon: Icons.email_outlined,
+                    hintText: "Email",
+                    maxLength: 40,
+                    onChanged: (_) => controller.validateRegister(),
+                    controller: controller.registerEmailController,
+                  ),
+                  CustomInputField(
+                    icon: Icons.phone_android_outlined,
+                    hintText: "Phone No",
+                    keyboardType: TextInputType.phone,
+                    maxLength: 10,
+                    onChanged: (_) => controller.validateRegister(),
+                    controller: controller.phoneNoController,
+                  ),
+                  CustomInputField(
+                    icon: Icons.password_outlined,
+                    hintText: "Password",
+                    maxLength: 24,
+                    onChanged: (_) => controller.validateRegister(),
+                    controller: controller.newPassController,
+                    isPassword: true,
+                  ),
+                  CustomInputField(
+                    icon: Icons.password_outlined,
+                    hintText: "Confirm Password",
+                    maxLength: 24,
+                    onChanged: (_) => controller.validateRegister(),
+                    controller: controller.confirmPassController,
+                    isPassword: true,
+                  ),
+        
+                  AppButton(
+                    title: "Register",
+                    enable: controller.isRegisterEnable,
+                    onPressed: () => controller.signUp(),
+                  ),
+                  // optional bottom spacing
                 ],
               ),
-              CustomInputField(
-                  icon: Icons.person,
-                  hintText: "Name",
-                  onChanged: (value) {
-                    controller.validateRegister();
-                  },
-                  controller: controller.nameController),
-              CustomInputField(
-                  icon: Icons.email_outlined,
-                  hintText: "Email",
-                  onChanged: (value) {
-                    controller.validateRegister();
-                  },
-                  controller: controller.registerEmailController),
-              CustomInputField(
-                  icon: Icons.phone_android_outlined,
-                  hintText: "Phone No",
-                  keyboardType: TextInputType.phone,
-                  maxLength: 10,
-                  onChanged: (value) {
-                    controller.validateRegister();
-                  },
-                  controller: controller.phoneNoController),
-              CustomInputField(
-                icon: Icons.password_outlined,
-                hintText: "Password",
-                onChanged: (value) {
-                  controller.validateRegister();
-                },
-                controller: controller.newPassController,
-                isPassword: true,
-              ),
-              CustomInputField(
-                icon: Icons.password_outlined,
-                hintText: "Confirm Password",
-                onChanged: (value) {
-                  controller.validateRegister();
-                },
-                controller: controller.confirmPassController,
-                isPassword: true,
-              ),
-              AppButton(
-                title: "Register",
-                enable: controller.isRegisterEnable,
-                onPressed: () {
-                  controller.signUp();
-                },
-              )
-            ],
+            ),
           ),
         ),
-      );
+      ).marginOnly(top: 10);
     });
   }
 }

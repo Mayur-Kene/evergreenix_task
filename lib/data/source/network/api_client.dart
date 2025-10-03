@@ -211,28 +211,59 @@ class ApiClient {
 
   Future<dynamic> _handleError(dynamic e) {
     if (e is DioException) {
-      var response = e.response?.data;
-      if (e.type == DioExceptionType.connectionError) {
-        return Future.error("Looks like you are not connected to internet.");
-      }
-      if (e.type == DioExceptionType.connectionTimeout) {
-        return Future.error(
-            "Server not reachable at this moment.Please try after sometime.");
-      }
-      switch (e.response?.statusCode) {
-        case 400:
-          return Future.error(response['error'] ??
-              "The request contains bad syntax or cannot be fulfilled");
-        case 500:
-          return Future.error(response['message'] ??
-              "Server not reachable at this moment.Please try after sometime.");
+      final response = e.response?.data;
+
+      // Handle by error type first
+      switch (e.type) {
+        case DioExceptionType.connectionTimeout:
+          return Future.error(
+              "Connection timed out. Please check your internet and try again.");
+        case DioExceptionType.sendTimeout:
+          return Future.error(
+              "Request timed out while sending data. Please try again.");
+        case DioExceptionType.receiveTimeout:
+          return Future.error(
+              "Response timed out. The server took too long to respond.");
+        case DioExceptionType.badResponse:
+        // Handle status code based errors
+          switch (e.response?.statusCode) {
+            case 400:
+              return Future.error(
+                  response?['error'] ?? "Invalid request. Please check your input.");
+            case 401:
+              return Future.error("Unauthorized. Please log in again.");
+            case 403:
+              return Future.error("Access denied. You don’t have permission.");
+            case 404:
+              return Future.error("Requested resource not found.");
+            case 409:
+              return Future.error("Conflict error. Duplicate or invalid state.");
+            case 422:
+              return Future.error("Validation error. Please check your inputs.");
+            case 500:
+              return Future.error(response?['message'] ??
+                  "Internal server error. Please try again later.");
+            case 503:
+              return Future.error("Service unavailable. Try again later.");
+            default:
+              return Future.error(response?['message'] ??
+                  "Unexpected server error. Please try again.");
+          }
+
+        case DioExceptionType.cancel:
+          return Future.error("Request was cancelled.");
+
+        case DioExceptionType.connectionError:
+          return Future.error("No internet connection. Please check your network.");
+
+        case DioExceptionType.unknown:
         default:
           return Future.error(
-              response['message'] ?? 'Something went wrong.Please Try Again');
+              "Unexpected error occurred. Please try again. (${e.message})");
       }
-      // return Future.error(e.message ?? 'Something went wrong.Please Try Again');
     } else {
-      return Future.error("Something went wrong.Please Try Again");
+      // Non-Dio exception fallback
+      return Future.error("Something went wrong. Please try again.");
     }
   }
 }

@@ -4,7 +4,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../themes/app_theme.dart';
 
@@ -58,7 +57,7 @@ class Toast {
           onTap: onAction,
           borderRadius: BorderRadius.circular(8.0),
           child: Text(
-            message ?? '',
+            message,
             style: AppTheme.textStyle(weight: FontWeight.w500, color: Colors.white),
           ).paddingSymmetric(horizontal: 10,vertical: 4),
         ),

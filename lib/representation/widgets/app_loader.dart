@@ -4,7 +4,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../themes/app_theme.dart';
 import '../themes/colors.dart';

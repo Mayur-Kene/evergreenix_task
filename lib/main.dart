@@ -1,8 +1,7 @@
 import 'package:evergreenix_task/representation/bindings/auth_binding.dart';
-import 'package:evergreenix_task/representation/screens/home_screen.dart';
-import 'package:evergreenix_task/representation/screens/login_screen.dart';
-import 'package:evergreenix_task/representation/screens/signup_screen.dart';
 import 'package:evergreenix_task/representation/screens/splash_screen.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -35,8 +34,8 @@ class MyApp extends StatelessWidget {
       initialBinding: AuthBinding(),
       builder: (context, child) {
         return SafeArea(
-          child: child!,
           top: false,
+          child: child!,
         );
       },
       home: SplashScreen(),

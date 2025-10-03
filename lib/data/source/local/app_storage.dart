@@ -18,8 +18,9 @@ class AppStorage {
 
 class StorageKey {
   static String isLoggedIn = 'is_logged_in';
-  static String userId = 'user_id';
+  static String email = "email";
+
   static String token = 'token';
-  static String user = 'user';
-  static String defaultAddress = 'default_address';
+
+
 }
