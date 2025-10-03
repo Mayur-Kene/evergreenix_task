@@ -1,6 +1,6 @@
 import 'package:evergreenix_task/data/repository/auth_repository.dart';
-import 'package:evergreenix_task/representation/screens/home_screen.dart';
-import 'package:evergreenix_task/representation/screens/login_screen.dart';
+import 'package:evergreenix_task/representation/screens/home/home_screen.dart';
+import 'package:evergreenix_task/representation/screens/auth/login_screen.dart';
 import 'package:evergreenix_task/representation/widgets/app_loader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';

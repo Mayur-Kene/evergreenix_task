@@ -1,13 +1,14 @@
 import 'package:evergreenix_task/representation/controllers/auth_controller.dart';
-import 'package:evergreenix_task/representation/screens/signup_screen.dart';
+import 'package:evergreenix_task/representation/screens/auth/signup_screen.dart';
+
 import 'package:evergreenix_task/representation/themes/colors.dart';
 import 'package:evergreenix_task/representation/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../themes/app_theme.dart';
-import '../widgets/custom_input_field.dart';
+import '../../themes/app_theme.dart';
+import '../../widgets/custom_input_field.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -32,7 +33,7 @@ class LoginScreen extends StatelessWidget {
                   height: 60,
                 ).marginOnly(bottom: 15),
                 Text(
-                  "Sign in to your Account",
+                  "Log in to your Account",
                   style: AppTheme.textStyle(size: 26, weight: FontWeight.bold),
                 ),
                 Row(
@@ -40,7 +41,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     Text(
                       "Don't have an account ? ",
-                      style: AppTheme.textStyle(size: 14),
+                      style: AppTheme.textStyle(size: 16),
                     ),
                     TextButton(
                       onPressed: () {
@@ -49,7 +50,7 @@ class LoginScreen extends StatelessWidget {
                       child: Text(
                         "Sign Up",
                         style: AppTheme.textStyle(
-                            size: 14, weight: FontWeight.w600, color: blue),
+                            size: 16, weight: FontWeight.w600, color: blue),
                       ),
                     ),
                   ],

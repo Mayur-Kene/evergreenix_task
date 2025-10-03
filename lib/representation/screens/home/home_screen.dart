@@ -5,7 +5,7 @@ import 'package:evergreenix_task/representation/widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../data/source/local/app_storage.dart';
+import '../../../data/source/local/app_storage.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

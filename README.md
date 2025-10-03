@@ -22,6 +22,8 @@ A simple Flutter project created as a task for **Evergreenix**, allowing users t
 | `flutter_svg: ^2.0.17` | 2.0.17 | To render SVG images in the app, ensuring crisp graphics on all screen sizes. |
 | `dio: ^5.9.0` | 5.9.0 | For performing HTTP requests (GET, POST, etc.) to communicate with APIs. |
 | `get_storage: ^2.1.1` | 2.1.1 | For lightweight local storage to persist user login data and app settings. |
+| `animate_do: ^4.2.0` | 4.2.0 | Provides prebuilt, easy-to-use animations (fade, bounce, zoom, etc.) to enhance UI/UX. Used for splash screen animations in this project. |
+
 
 ---
 
@@ -36,12 +38,12 @@ A simple Flutter project created as a task for **Evergreenix**, allowing users t
 - **Responsive UI:** Supports multiple screen sizes and renders SVG graphics using `flutter_svg`.
 - **Custom Fonts:** Uses `google_fonts` for modern and clean typography.
 
----
+-------------------------------------------
 
 Follow these steps to **clone and set up the project locally**:
 
 1. ## Clone the repository
-
+ 
  git clone <repository_url>
 
 2. ## Navigate to the project directory

@@ -38,7 +38,7 @@ class AppLoader {
                     const SizedBox(height: 10),
                     Text(
                       message,
-                      style: AppTheme.textStyle(size: 13),
+                      style: AppTheme.textStyle(size: 13,color: primary),
                     ),
                   ],
                 ),

@@ -1,12 +1,12 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:evergreenix_task/representation/screens/home_screen.dart';
-import 'package:evergreenix_task/representation/screens/login_screen.dart';
+import 'package:evergreenix_task/representation/screens/home/home_screen.dart';
+import 'package:evergreenix_task/representation/screens/auth/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../data/source/local/app_storage.dart';
-import '../themes/colors.dart';
+import '../../../data/source/local/app_storage.dart';
+import '../../themes/colors.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

@@ -1,5 +1,5 @@
 import 'package:evergreenix_task/representation/bindings/auth_binding.dart';
-import 'package:evergreenix_task/representation/screens/splash_screen.dart';
+import 'package:evergreenix_task/representation/screens/splash/splash_screen.dart';
 
 
 import 'package:flutter/material.dart';

@@ -1,13 +1,15 @@
 import 'package:evergreenix_task/representation/controllers/auth_controller.dart';
-import 'package:evergreenix_task/representation/screens/login_screen.dart';
+import 'package:evergreenix_task/representation/screens/auth/login_screen.dart';
 import 'package:evergreenix_task/representation/widgets/custom_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../themes/app_theme.dart';
-import '../themes/colors.dart';
-import '../widgets/app_button.dart';
+import '../../themes/app_theme.dart';
+import '../../themes/colors.dart';
+import '../../widgets/app_button.dart';
+
+
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
@@ -29,10 +31,10 @@ class SignupScreen extends StatelessWidget {
                     'assets/icons/logo.svg',
                     width: 60,
                     height: 60,
-                  ).marginOnly(bottom: 15),
+                  ).marginOnly(bottom: 15,top: 20),
                   Text(
                     "Create Account",
-                    style: AppTheme.textStyle(size: 26, weight: FontWeight.bold),
+                    style: AppTheme.textStyle(size: 28, weight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
         
@@ -41,7 +43,7 @@ class SignupScreen extends StatelessWidget {
                     children: [
                       Text(
                         "Already have account ?",
-                        style: AppTheme.textStyle(size: 14),
+                        style: AppTheme.textStyle(size: 16),
                       ),
                       TextButton(
                         onPressed: () {
@@ -51,7 +53,7 @@ class SignupScreen extends StatelessWidget {
                         child: Text(
                           "Login",
                           style: AppTheme.textStyle(
-                              size: 14, weight: FontWeight.w600, color: blue),
+                              size: 16, weight: FontWeight.w600, color: blue),
                         ),
                       ),
                     ],
@@ -107,7 +109,7 @@ class SignupScreen extends StatelessWidget {
             ),
           ),
         ),
-      ).marginOnly(top: 10);
+      );
     });
   }
 }
