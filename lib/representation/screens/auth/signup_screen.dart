@@ -9,8 +9,6 @@ import '../../themes/app_theme.dart';
 import '../../themes/colors.dart';
 import '../../widgets/app_button.dart';
 
-
-
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});
 
@@ -20,24 +18,23 @@ class SignupScreen extends StatelessWidget {
       return SafeArea(
         child: Scaffold(
           backgroundColor: primary,
-          resizeToAvoidBottomInset: true, // allows content to move up when keyboard opens
+          resizeToAvoidBottomInset: true,
           body: Center(
             child: SingleChildScrollView(
               child: Column(
-                mainAxisSize: MainAxisSize.min, // shrink to fit content
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   SvgPicture.asset(
                     'assets/icons/logo.svg',
                     width: 60,
                     height: 60,
-                  ).marginOnly(bottom: 15,top: 20),
+                  ).marginOnly(bottom: 15, top: 20),
                   Text(
                     "Create Account",
                     style: AppTheme.textStyle(size: 28, weight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
-        
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -47,18 +44,16 @@ class SignupScreen extends StatelessWidget {
                       ),
                       TextButton(
                         onPressed: () {
-                          controller.clearControllers(); // clear signup fields
+                          controller.clearControllers();
                           Get.offAll(const LoginScreen());
                         },
                         child: Text(
                           "Login",
-                          style: AppTheme.textStyle(
-                              size: 16, weight: FontWeight.w600, color: blue),
+                          style: AppTheme.textStyle(size: 16, weight: FontWeight.w600, color: blue),
                         ),
                       ),
                     ],
                   ),
-                 
                   CustomInputField(
                     icon: Icons.person,
                     hintText: "Name",
@@ -69,7 +64,8 @@ class SignupScreen extends StatelessWidget {
                   CustomInputField(
                     icon: Icons.email_outlined,
                     hintText: "Email",
-                    maxLength: 40,
+                    maxLength: 30,
+                    keyboardType: TextInputType.emailAddress,
                     onChanged: (_) => controller.validateRegister(),
                     controller: controller.registerEmailController,
                   ),
@@ -97,13 +93,11 @@ class SignupScreen extends StatelessWidget {
                     controller: controller.confirmPassController,
                     isPassword: true,
                   ),
-        
                   AppButton(
                     title: "Register",
                     enable: controller.isRegisterEnable,
                     onPressed: () => controller.signUp(),
                   ),
-                  // optional bottom spacing
                 ],
               ),
             ),

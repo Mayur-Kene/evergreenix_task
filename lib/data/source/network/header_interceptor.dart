@@ -7,13 +7,6 @@ import '../local/app_storage.dart';
 bool isUnauthorized = false;
 
 class HeaderInterceptor extends Interceptor {
-  @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    // if (response.statusCode == 200) {
-    //   AppStorage.logout();
-    // }
-    super.onResponse(response, handler);
-  }
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {

@@ -1,7 +1,3 @@
-
-
-
-
 import 'package:flutter/material.dart';
 
 class CustomInputField extends StatelessWidget {
@@ -13,22 +9,19 @@ class CustomInputField extends StatelessWidget {
   final bool readOnly;
   final VoidCallback? onTap;
   final ValueChanged<String>? onChanged;
-  final String? Function(String?)? validator;// ✅ add validator
   final int? maxLength;
 
-  const CustomInputField({
-    super.key,
-    required this.icon,
-    required this.hintText,
-    required this.controller,
-    this.isPassword = false,
-    this.keyboardType = TextInputType.text,
-    this.readOnly = false,
-    this.onTap,
-    this.onChanged,
-    this.validator, // ✅
-    this.maxLength
-  });
+  const CustomInputField(
+      {super.key,
+      required this.icon,
+      required this.hintText,
+      required this.controller,
+      this.isPassword = false,
+      this.keyboardType = TextInputType.text,
+      this.readOnly = false,
+      this.onTap,
+      this.onChanged,
+      this.maxLength});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +34,6 @@ class CustomInputField extends StatelessWidget {
         keyboardType: keyboardType,
         onTap: onTap,
         onChanged: onChanged,
-        validator: validator, // ✅ email validation works here
         maxLength: maxLength,
         decoration: InputDecoration(
           prefixIcon: Icon(icon, color: Colors.blueAccent),

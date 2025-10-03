@@ -1,7 +1,3 @@
-
-
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -38,7 +34,7 @@ class AppLoader {
                     const SizedBox(height: 10),
                     Text(
                       message,
-                      style: AppTheme.textStyle(size: 13,color: primary),
+                      style: AppTheme.textStyle(size: 13, color: primary),
                     ),
                   ],
                 ),

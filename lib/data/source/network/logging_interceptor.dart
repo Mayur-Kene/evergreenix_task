@@ -1,20 +1,15 @@
-
-
-
 import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
 
 class LoggingInterceptor extends Interceptor {
-
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    // final pretty = const JsonEncoder.withIndent('  ').convert(response.data);
     log('REQUEST =>  ${response.requestOptions.data}');
     log('RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.uri}');
     _printFormattedJson(response.data);
-    super.onResponse(response, handler); // Continue with the response
+    super.onResponse(response, handler);
   }
 
   @override
@@ -22,7 +17,7 @@ class LoggingInterceptor extends Interceptor {
     log('ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.uri}');
     log('REQUEST: ${err.response?.requestOptions.data}');
     _printFormattedJson(err.response?.data);
-    super.onError(err, handler); // Continue with the error
+    super.onError(err, handler);
   }
 
   void _printFormattedJson(dynamic jsonData) {

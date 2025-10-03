@@ -1,5 +1,6 @@
 import 'package:get_storage/get_storage.dart';
 
+
 class AppStorage {
   static final _storage = GetStorage("evergreenix");
 
@@ -19,8 +20,5 @@ class AppStorage {
 class StorageKey {
   static String isLoggedIn = 'is_logged_in';
   static String email = "email";
-
   static String token = 'token';
-
-
 }

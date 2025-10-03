@@ -24,13 +24,11 @@ class AuthController extends GetxController {
   final confirmPassController = TextEditingController();
 
   //boolean values
-
   var isLoginButtonEnable = false;
   var isRegisterEnable = false;
 
   void validateLogin() {
-    isLoginButtonEnable =
-        emailController.text.isNotEmpty && passController.text.isNotEmpty;
+    isLoginButtonEnable = emailController.text.isNotEmpty && passController.text.isNotEmpty;
     update();
   }
 
@@ -44,14 +42,8 @@ class AuthController extends GetxController {
   }
 
   void signIn() async {
-    if (!validateEmail(emailController)) {
-      Toast.error(message: "Enter a valid email");
-      return;
-    }
-    final body = {
-      "email": emailController.text,
-      "password": passController.text
-    };
+    if (!validateLoginForm()) return;
+    final body = {"email": emailController.text, "password": passController.text};
     AppLoader.showLoader();
     repository.signIn(body).then((response) {
       AppLoader.hideLoader();
@@ -78,7 +70,6 @@ class AuthController extends GetxController {
     AppLoader.showLoader();
     repository.signUp(body).then((response) {
       AppLoader.hideLoader();
-      // AppStorage.setValue(StorageKey.token, response['authToken']);
       Toast.success(message: "User Registered Successfully");
       Get.to(LoginScreen());
       clearControllers();
@@ -89,16 +80,12 @@ class AuthController extends GetxController {
   }
 
   void logout() {
-    // Clear saved token and login state
     AppStorage.logout();
     clearControllers();
-
-    // Navigate to Login Screen and remove HomeScreen from stack
     Get.offAll(() => LoginScreen());
   }
 
   bool validateSignupForm() {
-    // 1. All fields must be filled
     if (nameController.text.isEmpty ||
         registerEmailController.text.isEmpty ||
         phoneNoController.text.isEmpty ||
@@ -108,35 +95,41 @@ class AuthController extends GetxController {
       return false;
     }
 
-    // 2. Check email format
     if (!GetUtils.isEmail(registerEmailController.text.trim())) {
       Toast.error(message: "Enter a valid email address");
       return false;
     }
 
-    // 3. Check mobile number length (exactly 10 digits)
     if (phoneNoController.text.trim().length != 10) {
       Toast.error(message: "Mobile number must be 10 digits");
       return false;
     }
 
-    // 4. Password length validation
     if (newPassController.text.length < 6) {
       Toast.error(message: "Password must be at least 6 characters long");
       return false;
     }
 
-    // 5. Password and confirm password match
     if (newPassController.text != confirmPassController.text) {
       Toast.error(message: "Password and Confirm Password do not match");
       return false;
     }
 
-    return true; // ✅ Passed all checks
+    return true;
   }
 
-  bool validateEmail(TextEditingController controller) {
-    return GetUtils.isEmail(controller.text.trim());
+  bool validateLoginForm() {
+    if (!GetUtils.isEmail(emailController.text.trim())) {
+      Toast.error(message: "Enter a valid email");
+      return false;
+    }
+
+    if (passController.text.length < 6) {
+      Toast.error(message: "Password must be at least 6 characters long");
+      return false;
+    }
+
+    return true;
   }
 
   void clearControllers() {
@@ -148,7 +141,7 @@ class AuthController extends GetxController {
     emailController.clear();
     passController.clear();
     isLoginButtonEnable = false;
-    isRegisterEnable = false; // reset button state
+    isRegisterEnable = false;
     update();
   }
 }

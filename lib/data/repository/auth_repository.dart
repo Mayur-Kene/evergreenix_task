@@ -1,9 +1,6 @@
 import 'package:evergreenix_task/data/source/network/api_client.dart';
 
 class AuthRepository {
-
-
-
   Future<dynamic> signIn(Map<String, dynamic> body) async {
     try {
       final response = ApiClient.client.post('v1/account/signin', body);
